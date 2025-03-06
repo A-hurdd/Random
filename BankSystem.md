@@ -1,5 +1,5 @@
 //Abigail Hurd
-//Simple Banking System Simulation with Error Handling
+//Simple Banking System
 
 #include <iostream>
 #include <vector>
