@@ -1,0 +1,49 @@
+import json
+
+# Define compartments and categories
+compartments = {
+    "A1": "Stat Packs",
+    "B2": "Life Packs",
+    "C3": "Oxygen Tanks",
+    "D4": "Handteavys",
+    "E5": "Drug Boxes",
+}
+
+# Example inventory with items assigned to compartments
+inventory = [
+    {"id": "SP01", "name": "Stat Pack Alpha", "compartment": "A1"},
+    {"id": "SP02", "name": "Stat Pack Beta", "compartment": "A1"},
+    {"id": "LP01", "name": "Life Pack 15", "compartment": "B2"},
+    {"id": "OX01", "name": "Oxygen Tank A", "compartment": "C3"},
+    {"id": "HT01", "name": "Handteavy Gamma", "compartment": "D4"},
+    {"id": "DB01", "name": "Drug Box Zeta", "compartment": "E5"},
+]
+
+# Function to categorize the inventory
+def categorize_inventory():
+    categorized = {}
+    for item in inventory:
+        compartment = item["compartment"]
+        category = compartments.get(compartment, "Uncategorized")
+        categorized.setdefault(category, []).append(item)
+    return categorized
+
+# Function to display inventory by categories/compartments
+def display_inventory(categorized):
+    print("Inventory by Compartment:")
+    for category, items in categorized.items():
+        print(f"\n{category}:")
+        for item in items:
+            print(f"  {item['id']}: {item['name']} (Compartment {item['compartment']})")
+
+# Function to save inventory to a file
+def save_inventory(categorized, filename="inventory.json"):
+    with open(filename, "w") as file:
+        json.dump(categorized, file, indent=4)
+    print(f"\nInventory saved to {filename}")
+
+# Main execution
+if __name__ == "__main__":
+    categorized_inventory = categorize_inventory()
+    display_inventory(categorized_inventory)
+    save_inventory(categorized_inventory)
